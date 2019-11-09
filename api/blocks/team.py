@@ -16,6 +16,7 @@ def create_team(data):
                 'status': '0',
                 'error': e
             }))
+    return HttpResponse(renderers.JSONRenderer().render("lol"))
 
 
 def get_team(data):
