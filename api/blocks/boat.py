@@ -21,8 +21,8 @@ def register_boat(data):
         }))
 
 
-def get_boat(data):
-    boat = Boat.objects.filter(id=data['id'])
+def get_boat():
+    boat = Boat.objects.all().values()
     return HttpResponse(renderers.JSONRenderer().render(boat.values()))
 
 
