@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django import db
 from rest_framework import renderers
-from api.models import Member
+from api.models import Member, Role
 
 
 def register_member(data):
@@ -30,6 +30,12 @@ def login(data):
         return HttpResponse(renderers.JSONRenderer().render(member.values()))
     else:
         return HttpResponse(renderers.JSONRenderer().render({'status': '3'}))
+
+
+def get_role():
+    roles = Role.objects.all()
+    return HttpResponse(renderers.JSONRenderer().render(roles.values()))
+
 
 
 
