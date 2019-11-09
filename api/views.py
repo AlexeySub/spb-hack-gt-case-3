@@ -12,6 +12,12 @@ class Member(views.View):
         return member.get_members()
 
 
+class MemberLogin(views.View):
+    def post(self, request):
+        data = parsers.JSONParser().parse(request)
+        return member.login(data)
+
+
 class Role(views.View):
     def get(self, request):
         return member.get_role()
