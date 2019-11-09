@@ -34,7 +34,7 @@ def login(data):
     try:
         member = Member.objects.get(email=data['email'])
         if member.password == func.Hash(data['password']):
-            return HttpResponse(renderers.JSONRenderer().render(member.values()))
+            return HttpResponse(renderers.JSONRenderer().render(member))
     except Member.DoesNotExist:
         return HttpResponse(renderers.JSONRenderer().render({
             'status': '2',
