@@ -48,4 +48,4 @@ class Team(views.View):
         return team.create_team(data)
 
     def get(self, request):
-        return team.get_team(request)
+        return team.get_team(parsers.JSONParser().parse(request))
