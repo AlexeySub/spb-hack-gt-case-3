@@ -81,12 +81,8 @@ WSGI_APPLICATION = 'spbhackgtcase3.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dr7kvlm1j1mkg',
-        'USER': 'bjcfmouqgyvdgk',
-        'PASSWORD': 'aef4333c0b30bc96b9c3e7408aa25a7357763de6f87096ac46a1b79f133b1178',
-        'HOST': 'ec2-54-246-121-32.eu-west-1.compute.amazonaws.com',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
