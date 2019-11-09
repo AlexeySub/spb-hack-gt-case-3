@@ -8,7 +8,7 @@ def create_team(data):
     print(data)
     token = Token.objects.get(token=data['auth_token'])
     for member in data['member']:
-        team = Team(boat_id=Team.objects.get(user_id=token.user_id).boat_id, member=member)
+        team = Team(boat_id=Team.objects.get(member_id=token.user_id).boat_id, member=member)
         try:
             team.save()
             return HttpResponse(renderers.JSONRenderer().render({'status': '1'}))
