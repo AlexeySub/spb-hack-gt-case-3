@@ -21,7 +21,7 @@ def register_member(data):
     except Exception as e:
         return HttpResponse(renderers.JSONRenderer().render({
             'status': '0',
-            'error': str(type(e))
+            'error': type(e)
         }))
 
 
@@ -32,14 +32,31 @@ def get_members():
 
 def login(data):
     try:
-        member = Member.objects.get(email=data['email'])
-        if member.password == func.Hash(data['password']):
-            return HttpResponse(renderers.JSONRenderer().render(member))
+        memberr = Member.objects.get(email=data['email'])
+        if memberr.password == func.Hash(data['password']):
+            return HttpResponse(renderers.JSONRenderer().render(memberr.values()))
     except Member.DoesNotExist:
         return HttpResponse(renderers.JSONRenderer().render({
             'status': '2',
             'error': 'DoesNotExist'
         }))
+"""
+    try:
+        member = Member.objects.filter(email=data['email'])
+        member = Member.objects.get(email=data['email'])
+    except Exception as e:
+        return HttpResponse(renderers.JSONRenderer().render({
+            'status': '2',
+            'error': type(e)
+        }))
+    print(data)
+    print(data['password'])
+    if member.password == func.Hash(data['password']):
+        data.session[data['email']] = member.email
+        return HttpResponse(renderers.JSONRenderer().render(member.values()))
+    else:
+        return HttpResponse(renderers.JSONRenderer().render({'status': '3'}))
+"""
 
 
 def get_role():
