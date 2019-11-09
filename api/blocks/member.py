@@ -14,7 +14,6 @@ def register_member(data):
                     role_id=data['role'],
                     swimming_skill=data['swimming_skill'],
                     password=func.Hash(data['password']))
-    # if data['passport'] != '':
     
     try:
         member.save()
@@ -33,6 +32,17 @@ def get_members():
 
 def login(data):
     try:
+        member = Member.objects.get(email=data.POST['email'])
+        if member.password == data.POST['password']:
+            data.session['email'] = member.email
+            return HttpResponse(renderers.JSONRenderer().render(member.values()))
+    except Member.DoesNotExist:
+        return HttpResponse(renderers.JSONRenderer().render({
+            'status': '2',
+            'error': 'DoesNotExist'
+        }))
+"""
+    try:
         member = Member.objects.filter(email=data['email'])
     except Exception as e:
         return HttpResponse(renderers.JSONRenderer().render({
@@ -41,9 +51,22 @@ def login(data):
         }))
     
     if member.password == func.Hash(data['password']):
+        data.session[data['email']] = member.email
         return HttpResponse(renderers.JSONRenderer().render(member.values()))
     else:
         return HttpResponse(renderers.JSONRenderer().render({'status': '3'}))
+"""
+
+"""
+def logout(data):
+    try:
+        del data.session['email']
+    except KeyError:
+        pass
+    return HttpResponse(renderers.JSONRenderer().render({
+        'status': '1'
+    }))
+"""
 
 
 def get_role():
