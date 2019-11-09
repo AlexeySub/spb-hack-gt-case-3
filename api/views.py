@@ -10,7 +10,7 @@ class Member(views.View):
         return member.register_member(data)
 
     def get(self, request):
-        return member.get_members()
+        return member.get_members(request.GET)
 
 
 class MemberLogin(views.View):
