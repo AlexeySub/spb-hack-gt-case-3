@@ -20,10 +20,10 @@ def register_member(data):
     try:
         member.save()
         return HttpResponse(renderers.JSONRenderer().render({'id': member.id}))
-    except db.DataError as e:
+    except Exception as e:
         return HttpResponse(renderers.JSONRenderer().render({
             'status': '0',
-            'error': e
+            'error': type(e)
         }))
 
 
@@ -35,10 +35,10 @@ def get_members():
 def login(data):
     try:
         member = Member.objects.filter(email=data['email'])
-    except EmptyResultSet as e:
+    except Exception as e:
         return HttpResponse(renderers.JSONRenderer().render({
             'status': '2',
-            'error': e
+            'error': type(e)
         }))
     
     if member.password == func.Hash(data['password']):
