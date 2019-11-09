@@ -32,8 +32,8 @@ def get_members():
 
 def login(data):
     try:
-        member = Member.objects.get(email=data.POST['email'])
-        if member.password == func.Hash(data.POST['password']):
+        member = Member.objects.get(email=data['email'])
+        if member.password == func.Hash(data['password']):
             data.session['email'] = member.email
             return HttpResponse(renderers.JSONRenderer().render(member.values()))
     except Member.DoesNotExist:
