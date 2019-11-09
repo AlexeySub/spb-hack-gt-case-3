@@ -57,3 +57,6 @@ class Mobile(views.View):
         data = parsers.JSONParser().parse(request)
         print(data)
         return mobile.get_data(data)
+
+    def get(self, request):
+        print(request.GET)
