@@ -33,7 +33,7 @@ def get_members():
 def login(data):
     try:
         member = Member.objects.get(email=data.POST['email'])
-        if member.password == data.POST['password']:
+        if member.password == func.Hash(data.POST['password']):
             data.session['email'] = member.email
             return HttpResponse(renderers.JSONRenderer().render(member.values()))
     except Member.DoesNotExist:
@@ -44,12 +44,14 @@ def login(data):
 """
     try:
         member = Member.objects.filter(email=data['email'])
+        member = Member.objects.get(email=data['email'])
     except Exception as e:
         return HttpResponse(renderers.JSONRenderer().render({
             'status': '2',
             'error': type(e)
         }))
-    
+    print(data)
+    print(data['password'])
     if member.password == func.Hash(data['password']):
         data.session[data['email']] = member.email
         return HttpResponse(renderers.JSONRenderer().render(member.values()))
