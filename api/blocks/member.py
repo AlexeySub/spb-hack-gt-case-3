@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from django import db
 from rest_framework import renderers
-from api.models import Member, Role
+from api.models import Member, Role, Token
+import secrets
 from api.common import func
 
 
@@ -17,7 +18,12 @@ def register_member(data):
     
     try:
         member.save()
-        return HttpResponse(renderers.JSONRenderer().render({'id': member.id}))
+        token = Token(user_id=member.id, token=secrets.token_hex(51))
+        token.save()
+        return HttpResponse(renderers.JSONRenderer().render({
+            'id': member.id,
+            'auth_token': token.token
+        }))
     except Exception as e:
         return HttpResponse(renderers.JSONRenderer().render({
             'status': '0',
@@ -34,7 +40,11 @@ def login(data):
     try:
         member = Member.objects.get(email=data['email'])
         if member.password == func.Hash(data['password']):
-            return HttpResponse(renderers.JSONRenderer().render(member))
+            Token.objects.filter(user_id=member.id).update(token=secrets.token_hex(51))
+            return HttpResponse(renderers.JSONRenderer().render({
+                'auth_token': Token.objects.get(user_id=member.id).token,
+                'member_id': member.id
+            }))
     except Member.DoesNotExist:
         return HttpResponse(renderers.JSONRenderer().render({
             'status': '2',

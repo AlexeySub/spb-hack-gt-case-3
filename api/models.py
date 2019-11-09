@@ -69,8 +69,8 @@ class Team(models.Model):
 
 
 class Token(models.Model):
-    id_user = models.ForeignKey('Member', models.CASCADE, db_column='user',
-                                primary_key=True)  # Field name made lowercase.
+    user = models.ForeignKey('Member', models.CASCADE, db_column='user',
+                             primary_key=True, unique=True)  # Field name made lowercase.
     token = models.CharField(db_column='Token', blank=True, null=True, max_length=255)  # Field name made lowercase.
     time = models.DateTimeField(db_column='Time', blank=True, null=True, auto_now=True)  # Field name made lowercase.
 
