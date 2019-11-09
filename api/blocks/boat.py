@@ -28,4 +28,4 @@ def get_boat(data):
 
 def get_boat_class():
     classes = BoatClass.objects.all()
-    return HttpResponse(renderers.JSONRenderer().render(classes.values()))
+    return HttpResponse(renderers.JSONRenderer().render(classes.values()[1]))

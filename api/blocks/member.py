@@ -3,7 +3,6 @@ from django import db
 from rest_framework import renderers
 from api.models import Member, Role
 from api.common import func
-from django.core.exceptions import *
 
 
 def register_member(data):
