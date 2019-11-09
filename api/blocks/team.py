@@ -16,3 +16,12 @@ def create_team(data):
                 'status': '0',
                 'error': e
             }))
+
+
+def get_team(data):
+    teams = Team.objects.all().values()
+    members = list()
+    for team in teams:
+        if team.boat == data['boat']:
+            members.append(team.member)
+    return HttpResponse(renderers.JSONRenderer().render(members))
