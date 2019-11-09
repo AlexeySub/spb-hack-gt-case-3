@@ -1,6 +1,6 @@
 from django import views
 from rest_framework import parsers, renderers
-from api.blocks import boat, member, team
+from api.blocks import boat, member, team, mobile
 
 
 class Member(views.View):
@@ -49,3 +49,10 @@ class Team(views.View):
 
     def get(self, request):
         return team.get_team(parsers.JSONParser().parse(request))
+
+
+class Mobile(views.View):
+    def post(self, request):
+        data = parsers.JSONParser().parse(request)
+        print(data)
+        return mobile.get_data(data)
