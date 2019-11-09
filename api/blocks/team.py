@@ -10,11 +10,6 @@ def create_team(data):
     for member in data['member']:
         team = Team(boat_id=Team.objects.get(member_id=token.user_id).boat_id, member_id=member)
         try: 
-            Team.objects.filter(member_id=team.member_id)
-            continue
-        except:
-            None
-        try:
             team.save()
         except db.DataError as e:
             return HttpResponse(renderers.JSONRenderer().render({
