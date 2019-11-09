@@ -8,6 +8,8 @@ class Member(views.View):
         data = parsers.JSONParser().parse(request)
         print(data)
         return member.register_member(data)
+    def get(self, request):
+        return member.get_members()
 
 
 class Role(views.View):
