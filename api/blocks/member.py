@@ -1,3 +1,4 @@
+from django.core import exceptions
 from django.http import HttpResponse
 from django import db
 from rest_framework import renderers
