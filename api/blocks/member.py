@@ -41,7 +41,7 @@ def login(data):
             'error': e
         }))
     
-    if member.password == func(data['password']):
+    if member.password == func.Hash(data['password']):
         return HttpResponse(renderers.JSONRenderer().render(member.values()))
     else:
         return HttpResponse(renderers.JSONRenderer().render({'status': '3'}))
