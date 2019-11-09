@@ -33,7 +33,7 @@ def get_members():
 
 def login(data):
     try:
-        member = Member.objects.filter(email=data['email'])
+        member = Member.objects.get(email=data['email'])
     except Exception as e:
         return HttpResponse(renderers.JSONRenderer().render({
             'status': '2',
