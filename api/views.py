@@ -60,4 +60,4 @@ class Mobile(views.View):
 
     def get(self, request):
         print(request.GET)
-        return mobile.get_data(parsers.JSONParser().parse(request))
+        return mobile.get_data(request.GET)
