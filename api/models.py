@@ -6,7 +6,7 @@ class Boat(models.Model):
     id = models.AutoField(db_column='id', primary_key=True)
     name = models.CharField(db_column='name', max_length=255, null=False)
     boat_class = models.ForeignKey('BoatClass', models.DO_NOTHING,
-                                   db_column='class', null=False)
+                                   db_column='boat_class', null=False)
     boat_number = models.IntegerField(db_column='boat_number', null=False)
     tech_inspection = models.BooleanField(db_column='tech_inspection',
                                           default=False)
