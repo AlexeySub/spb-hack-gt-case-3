@@ -19,7 +19,7 @@ PyJWT==1.7.1
 pymorphy2==0.8
 pymorphy2-dicts==2.4.393442.3710985
 haversine==2.0.0
-httpie==1.0.2
+httpie==1.0.3
 docopt==0.6.2
 git-pythonpath==0.1.1
 colorama==0.4.1
