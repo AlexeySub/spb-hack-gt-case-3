@@ -60,7 +60,6 @@ def login(data):
         }))
 
 
-
 def get_role():
     roles = Role.objects.all()
     return HttpResponse(renderers.JSONRenderer().render(roles.values()))
