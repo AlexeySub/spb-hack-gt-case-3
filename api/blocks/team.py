@@ -5,9 +5,9 @@ from api.models import Team, Token, Member
 
 
 def create_team(data):
-    boat = data['boat']
+    token = Token.objects.get(token=data['auth_token'])
     for member in data['member']:
-        team = Team(boat=boat, member=member)
+        team = Team(boat=Team.objects.get(user_id=token.user_id, member=member)
         try:
             team.save()
             return HttpResponse(renderers.JSONRenderer().render({'status': '1'}))
