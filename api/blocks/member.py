@@ -20,7 +20,7 @@ def register_member(data):
     try:
         member.save()
         return HttpResponse(renderers.JSONRenderer().render({'id': member.id}))
-    except db.InternalError as e:
+    except db.DataError as e:
         return HttpResponse(renderers.JSONRenderer().render({
             'status': '0',
             'error': e

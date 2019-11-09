@@ -11,7 +11,7 @@ def create_team(data):
         try:
             team.save()
             return HttpResponse(renderers.JSONRenderer().render({'status': '1'}))
-        except db.IntegrityError as e:
+        except db.DataError as e:
             return HttpResponse(renderers.JSONRenderer().render({
                 'status': '0',
                 'error': e
