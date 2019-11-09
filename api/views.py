@@ -18,7 +18,7 @@ class MemberLogin(views.View):
         data = parsers.JSONParser().parse(request)
         print(data)
         print(request)
-        return member.login(request)
+        return member.login(data)
 
 
 class Role(views.View):
