@@ -33,6 +33,7 @@ def register_member(data):
 
 
 def get_members(data):
+    print(data)
     try:
         token = Token.objects.get(token=data['token'])
     except exceptions.ObjectDoesNotExist:
