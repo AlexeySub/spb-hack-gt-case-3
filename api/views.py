@@ -34,3 +34,5 @@ class Boat(views.View):
         data = parsers.JSONParser().parse(request)
         print(data)
         return boat.register_boat(data)
+    def get(self, request):
+        return boat.get_boat()
