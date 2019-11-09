@@ -38,8 +38,8 @@ def get_members(data):
         token = Token.objects.get(token=data['token'])
     except exceptions.ObjectDoesNotExist:
         return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы неавторизованы!'}))
-    if Member.objects.filter(id=token.user_id).role_id == 1:
-        members = Member.objects.get(role_id=2)
+    if Member.objects.get(id=token.user_id).role_id == 1:
+        members = Member.objects.filter(role_id=2)
         return HttpResponse(renderers.JSONRenderer().render(members.values()))
     else:
         return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы КЭП!'}))
