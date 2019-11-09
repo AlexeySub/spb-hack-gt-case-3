@@ -9,8 +9,11 @@ def create_team(data):
     token = Token.objects.get(token=data['auth_token'])
     for member in data['member']:
         team = Team(boat_id=Team.objects.get(member_id=token.user_id).boat_id, member_id=member)
-        if Team.objects.filter(member_id=team.member_id) != None:
+        try: 
+            Team.objects.filter(member_id=team.member_id)
             break
+        except:
+            None
         try:
             team.save()
         except db.DataError as e:
