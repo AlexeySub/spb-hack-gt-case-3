@@ -32,9 +32,8 @@ def get_members():
 
 def login(data):
     try:
-        member = Member.objects.get(email=data.POST['email'])
-        if member.password == func.Hash(data.POST['password']):
-            data.session['email'] = member.email
+        member = Member.objects.get(email=data['email'])
+        if member.password == func.Hash(data['password']):
             return HttpResponse(renderers.JSONRenderer().render(member.values()))
     except Member.DoesNotExist:
         return HttpResponse(renderers.JSONRenderer().render({
@@ -57,17 +56,6 @@ def login(data):
         return HttpResponse(renderers.JSONRenderer().render(member.values()))
     else:
         return HttpResponse(renderers.JSONRenderer().render({'status': '3'}))
-"""
-
-"""
-def logout(data):
-    try:
-        del data.session['email']
-    except KeyError:
-        pass
-    return HttpResponse(renderers.JSONRenderer().render({
-        'status': '1'
-    }))
 """
 
 
