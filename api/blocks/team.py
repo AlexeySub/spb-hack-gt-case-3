@@ -11,7 +11,7 @@ def create_team(data):
         team = Team(boat_id=Team.objects.get(member_id=token.user_id).boat_id, member_id=member)
         try: 
             Team.objects.filter(member_id=team.member_id)
-            break
+            continue
         except:
             None
         try:
