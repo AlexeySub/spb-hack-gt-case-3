@@ -21,6 +21,11 @@ def register_member(data):
         return HttpResponse(renderers.JSONRenderer().render({'status': '0'}))
 
 
+def get_members():
+    members = Member.objects.all().values()
+    return HttpResponse(renderers.JSONRenderer().render(members.values()))
+
+
 def login(data):
     try:
         member = Member.objects.filter(email=data['email'])
