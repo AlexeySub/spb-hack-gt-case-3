@@ -2,7 +2,7 @@ from django.core import exceptions
 from django.http import HttpResponse
 from django import db
 from rest_framework import renderers
-from api.models import Member, Role, Token
+from api.models import Member, Role, Token, Team
 import secrets
 from api.common import func
 
@@ -44,7 +44,7 @@ def get_members(data):
         return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы КЭП!'}))
 
     
-    def get_boat_members(data):
+def get_boat_members(data):
     try:
         token = Token.objects.get(token=data['token'])
     except exceptions.ObjectDoesNotExist:
