@@ -90,6 +90,12 @@ DATABASES = {
     }
 }
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgiref.inmemory.ChannelLayer",
+        "ROUTING": "spbhackgtcase3.routing.channel_routing",
+    },
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
