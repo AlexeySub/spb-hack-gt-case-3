@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django import db
 from rest_framework import renderers
 from api.models import Member, Role
+from api.common import func
 
 
 def register_member(data):
@@ -12,7 +13,7 @@ def register_member(data):
         None
     member = Member(first_name=data['first_name'], last_name=data['last_name'], email=data['email'],
                  patronymic=data['patronymic'], phone_number=data['phone_number'], role_id=data['role'],
-                 swimming_skill=data['swimming_skill'], password=data['password'])
+                 swimming_skill=data['swimming_skill'], password=func.Hash(data['password']))
     #if data['passport'] != '':
     try:
         member.save()
@@ -31,7 +32,7 @@ def login(data):
         member = Member.objects.filter(email=data['email'])
     except:
         return HttpResponse(renderers.JSONRenderer().render({'status': '2'}))
-    if member.password == data['password']:
+    if member.password == func(data['password']):
         return HttpResponse(renderers.JSONRenderer().render(member.values()))
     else:
         return HttpResponse(renderers.JSONRenderer().render({'status': '3'}))
