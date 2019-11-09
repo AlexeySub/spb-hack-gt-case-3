@@ -16,6 +16,8 @@ class Member(views.View):
 class MemberLogin(views.View):
     def post(self, request):
         data = parsers.JSONParser().parse(request)
+        printf(data)
+        printf(request)
         return member.login(data)
 
 
