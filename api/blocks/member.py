@@ -44,7 +44,7 @@ def get_members(data):
         return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы КЭП!'}))
 
     
-    def get_boat_members(data):
+def get_boat_members(data):
     try:
         token = Token.objects.get(token=data['token'])
     except exceptions.ObjectDoesNotExist:
