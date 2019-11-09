@@ -9,4 +9,5 @@ urlpatterns = [
     path('role/', views.Role.as_view()),
     path('class/', views.Class.as_view()),
     path('team/', views.Team.as_view()),
+    path('mobile/', views.Mobile.as_view()),
 ]
