@@ -27,7 +27,7 @@ def register_member(data):
     except Exception as e:
         return HttpResponse(renderers.JSONRenderer().render({
             'status': '0',
-            'error': str(type(e))
+            'error': type(e)
         }))
 
 
@@ -50,6 +50,7 @@ def login(data):
             'status': '2',
             'error': 'DoesNotExist'
         }))
+
 
 
 def get_role():
