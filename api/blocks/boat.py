@@ -5,7 +5,7 @@ from api.models import Boat, Team, BoatClass
 
 
 def register_boat(data):
-    boat = Boat(name=data['name'], boat_class_id=data['boat_class'], boat_number=data['boat_number'],
+    boat = Boat(name=data['name'], boat_class=data['boat_class'], boat_number=data['boat_number'],
                 tech_inspection=data['tech_inspection'])
 
     team = Team(boat_id=boat.id, member_id=data['member'])
