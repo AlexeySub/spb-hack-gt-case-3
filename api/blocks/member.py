@@ -23,7 +23,7 @@ def register_member(data):
         token = Token(user_id=member.id, token=secrets.token_hex(51))
         token.save()
         return HttpResponse(renderers.JSONRenderer().render({
-            'id': member.id,
+            'member_id': member.id,
             'auth_token': token.token
         }))
     except Exception as e:
