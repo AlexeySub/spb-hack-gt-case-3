@@ -50,10 +50,15 @@ class Class(views.View):
         return boat.get_boat_class()
     
     
+class Events(views.View):
+    def get(self, request):
+        return event.get_events()
+
+    
 class Event(views.View):
     def get(self, request):
         return event.get_event()
-
+    
 
 class Boat(views.View):
     def post(self, request):
