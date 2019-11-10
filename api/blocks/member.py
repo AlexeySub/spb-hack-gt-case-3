@@ -47,6 +47,10 @@ def get_members(data):
     
 def get_member(data):
     member = Member.objects.get(id=data['id'])
+    try:
+        boat_name = Boat.objects.get(id=Team.objects.get(member_id=member.id).boat_id).name
+    except:
+        boat_name = "none";
     return HttpResponse(renderers.JSONRenderer().render({
         'first_name':member.first_name,
         'last_name':member.last_name,
@@ -55,7 +59,7 @@ def get_member(data):
         'role':Role.objects.get(id=member.role_id).name,
         'email':member.email,
         'passport':member.passport,
-        'boat':Boat.objects.get(id=Team.objects.get(member_id=member.id).boat_id).name
+        'boat':boat_name
     }))
 
     
