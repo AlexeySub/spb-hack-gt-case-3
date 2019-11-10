@@ -8,7 +8,7 @@ def post_geo(data):
     print(data)
     try:
         Track.objects.filter(member_id=data['member']).update(coordinates=data['coordinates'])
-        return HttpResponse(renderers.JSONRenderer().render({'coordinates': track.coordinates}))
+        return HttpResponse(renderers.JSONRenderer().render({'coordinates': "11"}))
     except:
         track = Track(member_id=data['member'], coordinates=data['coordinates'])
         track.save()
