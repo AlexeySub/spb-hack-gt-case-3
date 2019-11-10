@@ -31,6 +31,9 @@ class Geo(views.View):
         data = parsers.JSONParser().parse(request)
         return geo.post_geo(data)
     
+    def get(self, request):
+        return geo.get_geo(request.GET)
+    
 
 class Role(views.View):
     def get(self, request):
