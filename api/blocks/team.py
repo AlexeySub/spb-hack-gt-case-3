@@ -11,6 +11,7 @@ def create_team(data):
         team = Team(boat_id=Team.objects.get(member_id=token.user_id).boat_id, member_id=member)
         try: 
             team.save()
+            Member.objects.filter(id=member).update(take_part_flag=False)
         except db.DataError as e:
             return HttpResponse(renderers.JSONRenderer().render({
                 'status': '0',
