@@ -1,10 +1,18 @@
-def ws_message(message):
-    # data = message.content['text']
-    print(message.content)
-    message.reply_channels.send("test_text")
+from channels.generic.websocket import AsyncWebsocketConsumer
+import json
 
-    
-def ws_add(message):
-    # Accept the connection
-    message.reply_channel.send({"accept": True})
-    
+
+class Consumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        await self.accept()
+
+    async def disconnect(self, code):
+        pass
+
+    async def websocket_receive(self, message):
+        print("message", message)
+        data = json.load(message["text"])
+        print("message text:", data)
+        await self.send({
+            'message': data
+        })
