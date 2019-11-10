@@ -7,7 +7,8 @@ from api import consumers
 application = ProtocolTypeRouter({
     'websocket': AuthMiddlewareStack(
         URLRouter([
-            url("ws://spb-hack-gt-case-3.herokuapp.com/mobile/", consumers.Consumer)
+            url("ws://spb-hack-gt-case-3.herokuapp.com/mobile/", consumers.Consumer),
+            url(r"^mobile/$", consumers.Consumer)
         ])
     )
 })
