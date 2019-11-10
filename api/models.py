@@ -76,3 +76,12 @@ class Token(models.Model):
 
     class Meta:
         db_table = "Token"
+
+
+class Track(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)
+    member = models.ForeignKey('Member', models.CASCADE, db_column='member')
+    coordinates = models.CharField(db_column='coordinates', max_length=20)
+
+    class Meta:
+        db_table = "Track"
