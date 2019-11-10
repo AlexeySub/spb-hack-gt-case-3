@@ -49,7 +49,7 @@ def get_member(data):
     
     member = Member.objects.filter(id=data['id']).values('first_name', 'last_name', 'patronymic', 'email', 'phone_number',
                                                       'passport', 'swimming_skill')
-    member.update({'role':Role.objects.get(id=member.role_id).name, 'boat':Boat.objects.get(id=Team.objects.get(user_id=member.id).boat_id).name})
+    member.update({'role':Role.objects.filter(id=member.role_id).name, 'boat':Boat.objects.filter(id=Team.objects.get(user_id=member.id).boat_id).name})
     print(1)
     return HttpResponse(renderers.JSONRenderer().render(member))
 
