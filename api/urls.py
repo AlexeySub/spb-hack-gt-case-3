@@ -11,4 +11,5 @@ urlpatterns = [
     path('team/', views.Team.as_view()),
     path('mobile/', views.Mobile.as_view()),
     path('profile/', views.Profile.as_view()),
+    path('geo/', views.Geo.as_view()),
 ]
