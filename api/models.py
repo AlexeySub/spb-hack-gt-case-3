@@ -86,3 +86,13 @@ class Track(models.Model):
     class Meta:
         db_table = "Track"
 
+
+class Events(models.Model):
+    id = models.AutoField(db_column='id', primary_key=True)
+    name = models.CharField(db_column='name', null=False, max_length=255)
+    description = models.TextField(db_column='description')
+    date = models.DateTimeField(db_column='date', null=False)
+    boat = models.ForeignKey('Team', models.DO_NOTHING, db_column='boat')
+
+    class Meta:
+        db_table = "Events"
