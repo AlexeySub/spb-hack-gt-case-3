@@ -5,7 +5,7 @@ from api.models import Events
 
 def get_events():
     events = Events.objects.all().values()
-    return HttpResponse(renderers.JSONRenderer().render(events.values))
+    return HttpResponse(renderers.JSONRenderer().render(events.values()))
 
 
 def get_event(data):
