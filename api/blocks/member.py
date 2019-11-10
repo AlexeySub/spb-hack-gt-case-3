@@ -46,11 +46,14 @@ def get_members(data):
     
     
 def get_member(data):
-    
-    memberr = Member.objects.get(id=data['id'])
-    memberr.update({'role':Role.objects.get(id=memberr.role_id).name, 'boat':Boat.objects.get(id=Team.objects.get(user_id=memberr.id).boat_id).name})
-    print(1)
-    return HttpResponse(renderers.JSONRenderer().render(memberr.role))
+    try:
+        member = Member.objects.filter(id=data['id']).values('first_name', 'last_name', 'patronymic', 'email', 'phone_number',
+                                                          'passport', 'swimming_skill')
+        for i in member:
+            member.update({'role':Role.objects.get(id=member.role_id).name, 'boat':Boat.objects.get(id=Team.objects.get(user_id=member.id).boat_id).name})
+            return HttpResponse(renderers.JSONRenderer().render(member))
+    except:
+        return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы КЭП!'}))
 
 
     
