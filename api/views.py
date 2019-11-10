@@ -22,7 +22,7 @@ class MemberLogin(views.View):
         return member.login(data)
     
     def get(self, request):
-        return member.get_boat_members(request.GET
+        return member.get_boat_members(request.GET)
 
 
 class Role(views.View):
