@@ -29,7 +29,7 @@ class Role(views.View):
     
 class Profile(views.View):
     def get(self, request):
-        return member.get_member(request.Get)
+        return member.get_member(request.GET)
 
 
 class Class(views.View):
