@@ -15,7 +15,8 @@ def register_member(data):
                     phone_number=data['phone_number'],
                     role_id=data['role'],
                     swimming_skill=data['swimming_skill'],
-                    password=func.Hash(data['password']))
+                    password=func.Hash(data['password'],
+                    take_part_flag=data['take_part_flag']))
     
     try:
         member.save()
