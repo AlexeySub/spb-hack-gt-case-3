@@ -57,7 +57,7 @@ class Events(views.View):
     
 class Event(views.View):
     def get(self, request):
-        return event.get_event()
+        return event.get_event(request.GET)
     
 
 class Boat(views.View):
