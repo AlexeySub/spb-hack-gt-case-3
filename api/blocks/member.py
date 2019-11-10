@@ -2,7 +2,7 @@ from django.core import exceptions
 from django.http import HttpResponse
 from django import db
 from rest_framework import renderers
-from api.models import Member, Role, Token, Team
+from api.models import Member, Role, Token, Team, Boat
 import secrets
 from api.common import func
 
