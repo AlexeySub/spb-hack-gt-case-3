@@ -8,6 +8,7 @@ from api.common import func
 
 
 def register_member(data):
+    data = data.POST
     member = Member(first_name=data['first_name'],
                     last_name=data['last_name'],
                     email=data['email'],
