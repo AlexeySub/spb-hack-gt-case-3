@@ -47,11 +47,10 @@ def get_members(data):
     
 def get_member(data):
     
-    memberr = Member.objects.get(id=data['id']).values('first_name', 'last_name', 'patronymic', 'email', 'phone_number',
-                                                      'passport', 'swimming_skill')
+    memberr = Member.objects.get(id=data['id'])
     memberr.update({'role':Role.objects.get(id=memberr.role_id).name, 'boat':Boat.objects.get(id=Team.objects.get(user_id=memberr.id).boat_id).name})
     print(1)
-    return HttpResponse(renderers.JSONRenderer().render(memberr))
+    return HttpResponse(renderers.JSONRenderer().render(memberr.values()))
 
     return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы КЭП!'}))
 
