@@ -1,7 +1,7 @@
-from channels.routing import route
-from api.consumers import ws_message, ws_add
+from channels.routing import ProtocolTypeRouter, URLRouter
+from channels.auth import AuthMiddlewareStack
+import api.routing
 
-channel_routing = [
-    route("websocket.connect", ws_add, path=r'^/mobile/$'),
-    route("websocket.receive", ws_message, path=r'^/mobile/$', method=r"^GET$"),
-]
+application = ProtocolTypeRouter({
+    'websocket': URLRouter(api.routing.websocket_urlpatterns)
+})

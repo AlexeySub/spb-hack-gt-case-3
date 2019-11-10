@@ -75,7 +75,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'spbhackgtcase3.wsgi.application'
-
+ASGI_APPLICATION = 'spbhackgtcase3.routing.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
