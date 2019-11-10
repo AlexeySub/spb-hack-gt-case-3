@@ -40,12 +40,6 @@ def get_members(data):
         return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы неавторизованы!'}))
     if Member.objects.get(id=token.user_id).role_id == 1:
         members = Member.objects.filter(role_id=2)
-        for i in members:
-            try:
-                team = Team.objects.get(member_id=i.id)
-                members.filter(id=!i.id)
-            except:
-                continue
         return HttpResponse(renderers.JSONRenderer().render(members.values()))
     else:
         return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы КЭП!'}))
