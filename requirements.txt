@@ -27,3 +27,4 @@ colorama==0.4.1
 DAWG-Python==0.7.2
 dj-database-url==0.5.0
 websockets==8.1
+channels==2.3.0

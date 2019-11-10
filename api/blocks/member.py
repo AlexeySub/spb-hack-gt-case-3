@@ -1,8 +1,8 @@
 from django.core import exceptions
 from django.http import HttpResponse
 from django import db
-from rest_framework import renderers
-from api.models import Member, Role, Token, Team
+from rest_framework import renderers, parsers
+from api.models import Member, Role, Token, Team, Boat
 import secrets
 from api.common import func
 
@@ -15,7 +15,8 @@ def register_member(data):
                     phone_number=data['phone_number'],
                     role_id=data['role'],
                     swimming_skill=data['swimming_skill'],
-                    password=func.Hash(data['password']))
+                    password=func.Hash(data['password']),
+                    take_part_flag=data['take_part_flag'])
     
     try:
         member.save()
@@ -39,22 +40,28 @@ def get_members(data):
     except exceptions.ObjectDoesNotExist:
         return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы неавторизованы!'}))
     if Member.objects.get(id=token.user_id).role_id == 1:
-        members = Member.objects.filter(role_id=2)
+        members = Member.objects.filter(role_id=2, take_part_flag=True)
         return HttpResponse(renderers.JSONRenderer().render(members.values()))
     else:
         return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы КЭП!'}))
     
     
 def get_member(data):
-    
-    memberr = Member.objects.get(id=data['id']).values('first_name', 'last_name', 'patronymic', 'email', 'phone_number',
-                                                      'passport', 'swimming_skill')
-    memberr.update({'role':Role.objects.get(id=memberr.role_id).name, 'boat':Boat.objects.get(id=Team.objects.get(user_id=memberr.id).boat_id).name})
-    print(1)
-    return HttpResponse(renderers.JSONRenderer().render(memberr))
-
-    return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы КЭП!'}))
-
+    member = Member.objects.get(id=data['id'])
+    try:
+        boat_name = Boat.objects.get(id=Team.objects.get(member_id=member.id).boat_id).name
+    except:
+        boat_name = "none";
+    return HttpResponse(renderers.JSONRenderer().render({
+        'first_name':member.first_name,
+        'last_name':member.last_name,
+        'patronymic':member.patronymic,
+        'phone_number':member.phone_number,
+        'role':Role.objects.get(id=member.role_id).name,
+        'email':member.email,
+        'passport':member.passport,
+        'boat':boat_name
+    }))
 
     
 def get_boat_members(data):
