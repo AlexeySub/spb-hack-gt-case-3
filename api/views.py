@@ -25,6 +25,11 @@ class MemberLogin(views.View):
 class Role(views.View):
     def get(self, request):
         return member.get_role()
+    
+    
+class Profile(views.View):
+    def get(self, request):
+        return member.get_member(request.Get)
 
 
 class Class(views.View):
