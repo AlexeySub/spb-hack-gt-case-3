@@ -74,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'spbhackgtcase3.wsgi.application'
+# WSGI_APPLICATION = 'spbhackgtcase3.wsgi.application'
 ASGI_APPLICATION = 'spbhackgtcase3.routing.application'
 
 # Database
@@ -93,8 +93,8 @@ DATABASES = {
 
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "asgiref.inmemory.ChannelLayer",
-        "ROUTING": "spbhackgtcase3.routing.channel_routing",
+        "BACKEND": "asgiref.sync.sync_to_async",
+        "ROUTING": "spbhackgtcase3.routing.application",
     },
 }
 
