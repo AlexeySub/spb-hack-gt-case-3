@@ -39,7 +39,7 @@ def get_members(data):
     except exceptions.ObjectDoesNotExist:
         return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы неавторизованы!'}))
     if Member.objects.get(id=token.user_id).role_id == 1:
-        members = Member.objects.filter(role_id=2, id!=Team.objects.all().member_id)
+        members = Member.objects.filter(role_id=2, !id=Team.objects.all().member_id)
         return HttpResponse(renderers.JSONRenderer().render(members.values()))
     else:
         return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы КЭП!'}))
