@@ -27,7 +27,7 @@ class MemberLogin(views.View):
 
     
 class Geo(views.View):
-    def post(self, request)
+    def post(self, request):
         data = parsers.JSONParser().parse(request)
         return geo.post_geo(data)
     
