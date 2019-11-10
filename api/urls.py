@@ -12,4 +12,6 @@ urlpatterns = [
     path('mobile/', views.Mobile.as_view()),
     path('profile/', views.Profile.as_view()),
     path('geo/', views.Geo.as_view()),
+    path('event/', views.Event.as_view()),
+    path('events/', views.Events.as_view()),
 ]
