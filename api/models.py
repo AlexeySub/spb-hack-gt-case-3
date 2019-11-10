@@ -92,7 +92,6 @@ class Events(models.Model):
     name = models.CharField(db_column='name', null=False, max_length=255)
     description = models.TextField(db_column='description')
     date = models.DateTimeField(db_column='date', null=False)
-    boat = models.ForeignKey('Team', models.DO_NOTHING, db_column='boat')
-
+    
     class Meta:
         db_table = "Events"
