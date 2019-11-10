@@ -69,8 +69,12 @@ def get_boat_members(data):
         token = Token.objects.get(token=data['token'])
     except exceptions.ObjectDoesNotExist:
         return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы неавторизованы!'}))
-    if Member.objects.filter(id=token.user_id).role_id == 1:
-        members = Member.objects.get(id=Team.objects.get(boat_id=Team.objects.filter(member_id=token.user_id)).member_id)
+    if Member.objects.get(id=token.user_id).role_id == 1:
+        team = Team.objects.filter(boat_id=Team.objects.get(member_id=token.user_id).boat_id)
+        list = []
+        for i in team:
+            list.append(i.member_id)
+        members = Member.objects.filter(id__in=list)
         return HttpResponse(renderers.JSONRenderer().render(members.values()))
     else:
         return HttpResponse(renderers.JSONRenderer().render({'error': 'Вы КЭП!'}))
