@@ -9,7 +9,7 @@ def post_geo(data):
     try:
         Track.objects.filter(member_id=data['member']).update(coordinates=data['coordinates'])
         return HttpResponse(renderers.JSONRenderer().render({'coordinates': track.coordinates}))
-    except:
+    except Exception as e:
         track = Track(member_id=data['member'], coordinates=data['coordinates'])
         track.save()
         return HttpResponse(renderers.JSONRenderer().render({'coordinates': track.coordinates}))
