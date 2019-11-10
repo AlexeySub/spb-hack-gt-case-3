@@ -7,7 +7,7 @@ class Member(views.View):
     def post(self, request):
         data = parsers.JSONParser().parse(request)
         print(data)
-        return member.register_member(request)
+        return member.register_member(data)
 
     def get(self, request):
         print(request)
