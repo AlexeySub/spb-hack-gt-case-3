@@ -2,7 +2,7 @@ from django.core import exceptions
 from django.http import HttpResponse
 from django import db
 from rest_framework import renderers, parsers
-from api.models import Member, Role, Token, Team, Boat
+from api.models import Member, Role, Token, Team, Boat, BoatClass
 import secrets
 from api.common import func
 
@@ -50,8 +50,14 @@ def get_member(data):
     member = Member.objects.get(id=data['id'])
     try:
         boat_name = Boat.objects.get(id=Team.objects.get(member_id=member.id).boat_id).name
+        boat_number = Boat.objects.get(id=Team.objects.get(member_id=member.id).boat_id).boat_number
+        boat_tech = Boat.objects.get(id=Team.objects.get(member_id=member.id).boat_id).tech_inspection
+        boat_class = BoatClass.objects.get(id=Boat.objects.get(id=Team.objects.get(member_id=member.id)).boat_class_id).name
     except:
-        boat_name = "none";
+        boat_name = "none"
+        boat_number = "none"
+        boat_tech = "none"
+        boat_class = "none"
     return HttpResponse(renderers.JSONRenderer().render({
         'first_name':member.first_name,
         'last_name':member.last_name,
@@ -60,7 +66,10 @@ def get_member(data):
         'role':Role.objects.get(id=member.role_id).name,
         'email':member.email,
         'passport':member.passport,
-        'boat':boat_name
+        'boat_name':boat_name,
+        'boat_number': boat_number,
+        'boat_tech': boat_tech,
+        'boat_class': boat_class,
     }))
 
     
