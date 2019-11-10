@@ -55,7 +55,7 @@ def get_member(data):
         'role':Role.objects.get(id=member.role_id).name,
         'email':member.email,
         'passport':member.passport,
-        'boat':Boat.objects.get(id=Team.objects.get(user_id=member.id).boat_id).name
+        'boat':Boat.objects.get(id=Team.objects.get(member_id=member.id).boat_id).name
     }))
 
     
