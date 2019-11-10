@@ -48,6 +48,11 @@ class Profile(views.View):
 class Class(views.View):
     def get(self, request):
         return boat.get_boat_class()
+    
+    
+class Event(views.View):
+    def get(self, request):
+        return event.get_event()
 
 
 class Boat(views.View):
