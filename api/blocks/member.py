@@ -48,9 +48,8 @@ def get_members(data):
 def get_member(data):
     member = Member.objects.filter(id=data['id']).values('first_name', 'last_name', 'patronymic', 'email', 'phone_number',
                                                       'passport', 'swimming_skill')
-    for i in member:
-        i.update({'role':Role.objects.get(id=i.role_id).name, 'boat':Boat.objects.get(id=Team.objects.get(user_id=i.id).boat_id).name})
-        return HttpResponse(renderers.JSONRenderer().render(i))
+    member.update({'role':Role.objects.get(id=i.role_id).name, 'boat':Boat.objects.get(id=Team.objects.get(user_id=i.id).boat_id).name})
+    return HttpResponse(renderers.JSONRenderer().render(i))
 
     
 def get_boat_members(data):
