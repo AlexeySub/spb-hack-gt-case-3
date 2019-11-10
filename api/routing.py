@@ -1,6 +1,13 @@
-from django.urls import re_path
-from . import consumers
+from channels.routing import ProtocolTypeRouter, URLRouter
+from channels.auth import AuthMiddlewareStack
+import api.routing
+from django.conf.urls import url
+from api import consumers
 
-websocket_urlpatterns = [
-    re_path(r'/mobile/$', consumers.Consumer)
-]
+application = ProtocolTypeRouter({
+    'websocket': AuthMiddlewareStack(
+        URLRouter([
+            url(r"^mobile/$", consumers.Consumer)
+        ])
+    )
+})
