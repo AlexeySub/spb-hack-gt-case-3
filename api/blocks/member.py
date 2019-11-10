@@ -64,7 +64,8 @@ def login(data):
             Token.objects.filter(user_id=member.id).update(token=secrets.token_hex(51))
             return HttpResponse(renderers.JSONRenderer().render({
                 'auth_token': Token.objects.get(user_id=member.id).token,
-                'member_id': member.id
+                'member_id': member.id,
+                'role': Role.objects.get(id=member.role_id).name
             }))
     except Member.DoesNotExist:
         return HttpResponse(renderers.JSONRenderer().render({
