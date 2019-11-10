@@ -1,14 +1,14 @@
 from django.core import exceptions
 from django.http import HttpResponse
 from django import db
-from rest_framework import renderers
+from rest_framework import renderers, parsers
 from api.models import Member, Role, Token, Team, Boat
 import secrets
 from api.common import func
 
 
 def register_member(data):
-    data = data.POST
+    data = parsers.JSONParser().parse(data.POST)
     member = Member(first_name=data['first_name'],
                     last_name=data['last_name'],
                     email=data['email'],
