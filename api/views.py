@@ -1,6 +1,6 @@
 from django import views
 from rest_framework import parsers, renderers
-from api.blocks import boat, member, team, mobile, geo
+from api.blocks import boat, member, team, mobile, geo, event
 
 
 class Member(views.View):
