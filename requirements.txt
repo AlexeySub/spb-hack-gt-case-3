@@ -15,7 +15,7 @@ psycopg2==2.8.4
 urllib3==1.25.6
 whitenoise==4.1.2
 dj-database-url==0.5.0
-Pygments==2.3.1
+Pygments==2.7.4
 PyJWT==1.7.1
 pymorphy2==0.8
 pymorphy2-dicts==2.4.393442.3710985
